@@ -1,5 +1,3 @@
-arch: ppc64le
-
 language: go
 
 go:
@@ -11,6 +9,14 @@ go:
   - 1.8.x
   - 1.9.x
   - master
+  
+# Matrix for PPC64LE
+matrix:
+  include:
+    - go: 1.9.x
+      arch: ppc64le
+    - go: 1.11.x
+      arch: ppc64le
 
 after_script:
   - FIXIT=$(go fmt ./...); if [ -n "${FIXIT}" ]; then FIXED=$(echo $FIXIT | wc -l); echo "gofmt - ${FIXED} file(s) not formatted correctly, please run gofmt to fix them:\n ${FIXIT} " && exit 1; fi
